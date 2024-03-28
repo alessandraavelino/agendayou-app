@@ -81,9 +81,36 @@ const getBusinessListByCategory = async (category) => {
 
 }
 
+const createBooking = async (data) => {
+  const mutationQuery = gql `
+  mutation createBooking {
+    createBooking(
+      data: {bookingStatus: Agendado, 
+        date: "`+data.date+`", 
+        businessList: {
+          connect: {id: "`+data.businessId+`"}}, 
+          time: "`+data.time+`", 
+          userEmail: "`+data.userEmail+`", 
+          userName: "`+data.userName+`"}
+    ) {
+      id
+    }
+    publishManyBookings(to: PUBLISHED) {
+      count
+    }
+  }
+  
+  
+  `
+
+  const result = await request(MASTER_URL, mutationQuery)
+  return result
+}
+
 export default {
     getSlider,
     getCategories,
     getBusinessLists,
-    getBusinessListByCategory
+    getBusinessListByCategory,
+    createBooking
 }

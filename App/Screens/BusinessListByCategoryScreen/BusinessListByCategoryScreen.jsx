@@ -5,6 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import GlobalApi from '../../Utils/GlobalApi';
 import BusinessListItem from './BusinessListItem';
 import Colors from '../../Utils/Colors';
+import PageHeading from '../../Components/PageHeading';
 
 export default function BusinessListByCategoryScreen() {
   const param = useRoute().params;
@@ -12,7 +13,6 @@ export default function BusinessListByCategoryScreen() {
   const [businessList, setBusinessList] = useState([]);
 
   useEffect(() => {
-    console.log("teste")
     param && getBusinessByCategory()
   }, [param])
 
@@ -22,11 +22,9 @@ export default function BusinessListByCategoryScreen() {
   }
   return (
     <View style={{padding:20, paddingTop: 30}}>
+      <PageHeading title={param.category} />
 
-      <TouchableOpacity onPress={() => navigation.goBack()} style={{display: 'flex', flexDirection: 'row', gap: 10, alignItems: 'center'}}>
-        <Ionicons name="arrow-back-outline" size={24} color="black" />
-        <Text style={{fontSize: 25}}>{param?.category}</Text>
-      </TouchableOpacity>
+      
       {businessList?.length > 0 ? <FlatList 
         style={{marginTop: 15}}
         data={businessList}
