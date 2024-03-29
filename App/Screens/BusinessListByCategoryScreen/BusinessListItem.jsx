@@ -3,8 +3,8 @@ import React from 'react'
 import Colors from '../../Utils/Colors'
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-
-export default function BusinessListItem({business}) {
+import { AntDesign } from '@expo/vector-icons';
+export default function BusinessListItem({business, booking}) {
 
   const navigation = useNavigation();
 
@@ -19,11 +19,15 @@ export default function BusinessListItem({business}) {
       />
 
       <View style={styles.subContainer}>
-        <Text style={{fontSize: 15, color: Colors.GRAY}}>{business.name}</Text>
-        <Text style={{fontSize: 19, fontWeight: 'bold'}}>{business.contactPerson}</Text>
-        <Text style={{fontSize: 16, color: Colors.GRAY}}>
+        <Text style={{fontSize: 15, color: Colors.GRAY}}>{business?.name}</Text>
+        <Text style={{fontSize: 19, fontWeight: 'bold'}}>{business?.contactPerson}</Text>
+        {!booking?.id ? <Text style={{fontSize: 16, color: Colors.GRAY}}>
             <Ionicons name="location-sharp" size={20} color={Colors.PRIMARY} />
-        {business.address}</Text>
+        {business.address}</Text> :
+
+        <Text style={{backgroundColor: Colors.PRIMARY_LIGHT, fontSize: 10, padding: 3, color: Colors.PRIMARY, borderRadius: 3, alignSelf: 'flex-start'}}>{booking?.bookingStatus}</Text>}
+        {booking?.id ? <Text style={{fontSize: 15, padding: 3, color: Colors.PRIMARY, alignSelf: 'flex-start'}}><AntDesign name="calendar" size={24} color={Colors.PRIMARY} style={{marginRight: 15}}/> {booking?.date} às {booking?.time}</Text> : null}
+    
       </View>
 
     </TouchableOpacity>

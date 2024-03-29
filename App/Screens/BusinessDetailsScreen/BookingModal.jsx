@@ -46,6 +46,7 @@ export default function BookingModal({businessId, hideModal}) {
   const createNewBooking = () => {
     if (!selectedTime || !selectedDate) {
       ToastAndroid.show("Por favor, selecione uma Data e Hora!", ToastAndroid.LONG)
+      return
       
     }
     const data = {
