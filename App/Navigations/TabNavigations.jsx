@@ -17,7 +17,7 @@ export default function TabNavigations() {
         headerShown: false,
         tabBarActiveTintColor: Colors.PRIMARY
     }}>
-        <Tab.Screen name='home' component={HomeNavigation} options={{
+        <Tab.Screen name='HomeScreen' component={HomeNavigation} options={{
             tabBarLabel:({color}) =>(
             <Text style={{color: color, fontSize: 12, marginTop: -7}}>Início</Text>
             ),
