@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, Modal } from 'react-native'
+import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, Modal, Linking } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useRoute, useNavigation } from '@react-navigation/native'
 import { Ionicons } from '@expo/vector-icons';
@@ -20,7 +20,11 @@ export default function BusinessDetailsScreen() {
   useEffect(() => {
   }, [])
 
-  return (
+  const onMessageBtnClick = () => {
+    Linking.openURL(`https://api.whatsapp.com/send?phone=${encodeURIComponent(business.contactPerson)}&text=${encodeURIComponent(`Olá, vim pelo AgendaYOU`)}`)
+  }
+
+  return business && (
     <View>
     <ScrollView style={{height: '90%'}}>
       <TouchableOpacity style={styles.backBtnContainer} onPress={() => navigation.goBack()}>
@@ -48,7 +52,7 @@ export default function BusinessDetailsScreen() {
       
     </ScrollView>
     <View style={{display: 'flex', flexDirection: 'row', margin: 7, gap: 8}}>
-      <TouchableOpacity style={styles.messageBtn}>
+      <TouchableOpacity style={styles.messageBtn} onPress={() => onMessageBtnClick()}>
         <Text style={{textAlign: 'center', fontWeight: 'bold', fontSize: 15, color: Colors.PRIMARY}}>Mensagem</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.bookingBtn} onPress={() => setShowModal(true)}>

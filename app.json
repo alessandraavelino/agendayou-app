@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "agendayou-app",
-    "slug": "agendayou-app",
+    "name": "AgendaYOU",
+    "slug": "AgendaYOU",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -22,10 +22,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.alessandraavelino.agendayou"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "d80a41ba-811e-46f9-8866-0587ad027dee"
+      }
     }
   }
 }

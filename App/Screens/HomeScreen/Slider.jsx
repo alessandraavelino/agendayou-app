@@ -19,7 +19,7 @@ export default function Slider() {
     }
   return (
     <View>
-      <Heading text={"Ofertas para você"} />
+      <Heading text={"Facilidades para você"} />
       <FlatList 
         data={slider}
         horizontal={true}
@@ -45,8 +45,7 @@ const styles = StyleSheet.create({
     sliderImage: {
         width: 270,
         height: 150,
-        borderRadius: 20,
-        objectFit: 'contain'
+        borderRadius: 20
     }
 
 })
