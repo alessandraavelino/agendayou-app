@@ -37,7 +37,7 @@ export default function Login() {
 
             <Text style={{fontSize: 17, color: Colors.WHITE, textAlign: 'center', marginTop: 20}}>Melhor App para encontrar serviços próximos de você</Text>
 
-            <TouchableOpacity style={styles.button} onPress={onPress}>
+            <TouchableOpacity style={styles.button}>
                 <Text style={{textAlign:'center', fontSize: 17, color: Colors.PRIMARY}}>Vamos começar</Text>
             </TouchableOpacity>
         </View>
