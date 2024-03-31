@@ -6,7 +6,7 @@ import { Feather } from "@expo/vector-icons";
 import { FontAwesome } from '@expo/vector-icons';
 
 export default function Header() {
-  const { user, isLoading } = useUser();
+  const { user } = useUser();
 
   return (
     user && (
