@@ -21,7 +21,6 @@ export default function BusinessDetailsScreen() {
   useEffect(() => {
     if (param.business) {
       setBusiness(param?.business);
-      console.log("linhja24", param?.business)
     }
   }, [param]);
 
