@@ -6,6 +6,7 @@ import ProfileScreen from '../Screens/ProfileScreen/ProfileScreen';
 import { FontAwesome5, Feather} from '@expo/vector-icons';
 import Colors from '../Utils/Colors';
 import HomeNavigation from './HomeNavigation';
+import BookingNavigation from './BookingNavigation';
 
 const Tab = createBottomTabNavigator();
 
@@ -24,7 +25,7 @@ export default function TabNavigations() {
                 <FontAwesome5 name="home" size={24} color={color} />
             )
         }}/>
-        <Tab.Screen name='booking' component={BookingScreen} options={{
+        <Tab.Screen name='booking' component={BookingNavigation} options={{
             tabBarLabel:({color}) =>(
             <Text style={{color: color, fontSize: 12, marginTop: -7}}>Agendamentos</Text>
             ),

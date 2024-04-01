@@ -19,7 +19,11 @@ export default function BusinessDetailsScreen() {
   
 
   useEffect(() => {
-  }, [])
+    if (param.business) {
+      setBusiness(param?.business);
+      console.log("linhja24", param?.business)
+    }
+  }, [param]);
 
   const onMessageBtnClick = () => {
     Linking.openURL(`https://api.whatsapp.com/send?phone=${encodeURIComponent(business.contactPerson)}&text=${encodeURIComponent(`Olá, vim pelo AgendaYOU`)}`)
@@ -27,7 +31,7 @@ export default function BusinessDetailsScreen() {
 
   return business && (
     <View>
-    <ScrollView style={{height: '90%'}} horizontal={false}>
+    {/* <ScrollView style={{height: '90%'}} horizontal={false}>
       <TouchableOpacity style={styles.backBtnContainer} onPress={() => navigation.goBack()}>
       <Ionicons name="arrow-back-outline" size={24} color="white" />
       </TouchableOpacity>
@@ -64,7 +68,7 @@ export default function BusinessDetailsScreen() {
       <BookingModal businessId={business.id} hideModal={() => setShowModal(false)} />
       
 
-    </Modal>
+    </Modal> */}
     </View>
   )
 }
