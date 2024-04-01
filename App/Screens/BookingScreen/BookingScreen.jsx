@@ -1,4 +1,4 @@
-import { View, Text, FlatList } from 'react-native'
+import { View, FlatList } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import PageHeading from '../../Components/PageHeading'
 import GlobalApi from '../../Utils/GlobalApi'
