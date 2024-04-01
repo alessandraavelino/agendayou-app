@@ -9,7 +9,7 @@ import BusinessList from './BusinessList'
 export default function HomeScreen() {
   return (
     <ScrollView showsVerticalScrollIndicator={false} horizontal={false}>
-      {/* <Header /> */}
+      <Header />
       <View style={{padding: 20}}>
       <Slider />
       <Categories />
