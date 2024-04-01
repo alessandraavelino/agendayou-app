@@ -1,6 +1,7 @@
-import { View, Text, TouchableOpacity, StyleSheet, FlatList, TextInput, ScrollView, KeyboardAvoidingView, ToastAndroid } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, FlatList, TextInput, KeyboardAvoidingView, ToastAndroid } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { Ionicons } from '@expo/vector-icons';
+import { ScrollView } from 'react-native-virtualized-view'
 import CalendarPicker from "react-native-calendar-picker";
 import Colors from '../../Utils/Colors';
 import Heading from '../../Components/Heading';
@@ -65,7 +66,7 @@ export default function BookingModal({businessId, hideModal}) {
   }
 
   return (
-    <ScrollView>
+    <ScrollView horizontal={false}>
     <KeyboardAvoidingView style={{padding: 20}}>
       <TouchableOpacity onPress={() =>hideModal()} style={{display: 'flex', flexDirection: 'row', gap: 10, alignItems: 'center', marginBottom: 20}}>
         <Ionicons name="arrow-back-outline" size={24} color="black" />

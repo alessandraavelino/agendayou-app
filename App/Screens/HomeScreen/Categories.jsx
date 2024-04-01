@@ -23,6 +23,7 @@ export default function Categories() {
     <View style={{marginTop: 10}}>
       <Heading text={'Categorias'} isViewAll={true} />
       <FlatList
+      horizontal={false}
         data={categories}
         numColumns={4}
         renderItem={({item, index}) => index <= 3 &&(

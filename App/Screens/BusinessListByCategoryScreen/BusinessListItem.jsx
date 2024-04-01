@@ -9,7 +9,7 @@ export default function BusinessListItem({business, booking}) {
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity style={styles.container} onPress={() => navigation.push('business-detail', 
+    <TouchableOpacity style={styles.container} onPress={() => navigation.push('business-details', 
     {
       business: business
     })

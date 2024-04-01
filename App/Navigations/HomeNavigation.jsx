@@ -13,7 +13,7 @@ export default function HomeNavigation() {
     }}>
         <Stack.Screen name="home" component={HomeScreen} />
         <Stack.Screen name="business-list" component={BusinessListByCategoryScreen} />
-        <Stack.Screen name="business-detail" component={BusinessDetailsScreen} />
+        <Stack.Screen name="business-details" component={BusinessDetailsScreen} />
     </Stack.Navigator>
   )
 }

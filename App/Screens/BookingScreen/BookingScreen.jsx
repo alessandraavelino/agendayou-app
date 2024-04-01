@@ -7,6 +7,8 @@ import BusinessListItem from '../BusinessListByCategoryScreen/BusinessListItem'
 
 export default function BookingScreen() {
 
+  
+
   const { user } = useUser()
   const [bookingList, setBookingList] = useState([])
   const [loading, setLoading] = useState(false)
@@ -28,13 +30,14 @@ export default function BookingScreen() {
     <View style={{padding: 20}}>
       <PageHeading title={'Meus agendamentos'}/>
 
-      <View>
+      <View  style={{marginTop: 20}}>
         <FlatList 
+        horizontal={false}
         data={bookingList}
         onRefresh={() => getUserBookings()}
         refreshing={loading}
         renderItem={({item, index}) => (
-          <BusinessListItem business={item?.businessList} booking={item}/>
+          <BusinessListItem business={item.businessList} booking={item}/>
         )}
         
         />

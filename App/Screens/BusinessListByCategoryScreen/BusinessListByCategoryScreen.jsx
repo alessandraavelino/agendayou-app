@@ -25,6 +25,7 @@ export default function BusinessListByCategoryScreen() {
 
       
       {businessList?.length > 0 ? <FlatList 
+      horizontal={false}
         style={{marginTop: 15}}
         data={businessList}
         renderItem={({item, index}) => (

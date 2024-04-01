@@ -1,5 +1,6 @@
-import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, Modal, Linking } from 'react-native'
+import { View, Text, Image, TouchableOpacity, StyleSheet, Modal, Linking } from 'react-native'
 import React, { useEffect, useState } from 'react'
+import { ScrollView } from 'react-native-virtualized-view'
 import { useRoute, useNavigation } from '@react-navigation/native'
 import { Ionicons } from '@expo/vector-icons';
 import Colors from '../../Utils/Colors';
@@ -26,7 +27,7 @@ export default function BusinessDetailsScreen() {
 
   return business && (
     <View>
-    <ScrollView style={{height: '90%'}}>
+    <ScrollView style={{height: '90%'}} horizontal={false}>
       <TouchableOpacity style={styles.backBtnContainer} onPress={() => navigation.goBack()}>
       <Ionicons name="arrow-back-outline" size={24} color="white" />
       </TouchableOpacity>
