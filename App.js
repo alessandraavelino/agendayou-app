@@ -1,7 +1,7 @@
-import { StatusBar } from 'expo-status-bar';
+// import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import Login from './App/Screens/LoginScreen/Login';
-import { ClerkProvider, SignedIn, SignedOut } from '@clerk/clerk-expo';
+// import Login from './App/Screens/LoginScreen/Login';
+// import { ClerkProvider, SignedIn, SignedOut } from '@clerk/clerk-expo';
 import { NavigationContainer } from '@react-navigation/native';
 import TabNavigations from './App/Navigations/TabNavigations';
 import * as SecureStore from "expo-secure-store";
@@ -23,22 +23,25 @@ const tokenCache = {
   },
 };
 
-export default function App() {
+export default function App(){
   return (
-    <ClerkProvider tokenCache={tokenCache} publishableKey='pk_test_dmlhYmxlLWZseS02MS5jbGVyay5hY2NvdW50cy5kZXYk'>
-    <View style={styles.container}>
+    <NavigationContainer>
+      <TabNavigations />
+    </NavigationContainer>
+    // <ClerkProvider tokenCache={tokenCache} publishableKey='pk_test_dmlhYmxlLWZseS02MS5jbGVyay5hY2NvdW50cy5kZXYk'>
+    // <View style={styles.container}>
       
-      <SignedIn>
-          <NavigationContainer>
-            <TabNavigations />
-          </NavigationContainer>
-        </SignedIn>
-        <SignedOut>
-        <Login />
-        </SignedOut>
-      <StatusBar style="auto" />
-    </View>
-    </ClerkProvider>
+    //   <SignedIn>
+    //       <NavigationContainer>
+    //         <TabNavigations />
+    //       </NavigationContainer>
+    //     </SignedIn>
+    //     <SignedOut>
+    //     <Login />
+    //     </SignedOut>
+    //   <StatusBar style="auto" />
+    // </View>
+    // </ClerkProvider>
   );
 }
 

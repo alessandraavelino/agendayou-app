@@ -31,7 +31,7 @@ export default function BusinessDetailsScreen() {
 
   return business && (
     <View>
-    {/* <ScrollView style={{height: '90%'}} horizontal={false}>
+    <ScrollView style={{height: '90%'}} horizontal={false}>
       <TouchableOpacity style={styles.backBtnContainer} onPress={() => navigation.goBack()}>
       <Ionicons name="arrow-back-outline" size={24} color="white" />
       </TouchableOpacity>
@@ -68,7 +68,7 @@ export default function BusinessDetailsScreen() {
       <BookingModal businessId={business.id} hideModal={() => setShowModal(false)} />
       
 
-    </Modal> */}
+    </Modal>
     </View>
   )
 }

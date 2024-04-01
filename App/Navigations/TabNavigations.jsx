@@ -1,7 +1,6 @@
 import { Text } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import BookingScreen from '../Screens/BookingScreen/BookingScreen';
 import ProfileScreen from '../Screens/ProfileScreen/ProfileScreen';
 import { FontAwesome5, Feather} from '@expo/vector-icons';
 import Colors from '../Utils/Colors';
