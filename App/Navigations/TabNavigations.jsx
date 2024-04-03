@@ -26,7 +26,15 @@ export default function TabNavigations() {
         }}/>
         <Tab.Screen name='booking' component={BookingNavigation} options={{
             tabBarLabel:({color}) =>(
-            <Text style={{color: color, fontSize: 12, marginTop: -7}}>Agendamentos</Text>
+            <Text style={{color: color, fontSize: 12, marginTop: -7}}>Agenda</Text>
+            ),
+            tabBarIcon: ({color, size}) =>(
+                <FontAwesome5 name="calendar-alt" size={24} color={color} />
+            )
+        }}/>
+        <Tab.Screen name='bookisng' component={BookingNavigation} options={{
+            tabBarLabel:({color}) =>(
+            <Text style={{color: color, fontSize: 12, marginTop: -7}}>Painel</Text>
             ),
             tabBarIcon: ({color, size}) =>(
                 <FontAwesome5 name="calendar-alt" size={24} color={color} />

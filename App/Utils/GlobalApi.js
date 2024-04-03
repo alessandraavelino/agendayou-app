@@ -133,11 +133,38 @@ const getUserBooking = async (userEmail) => {
   return result
 }
 
+const createBusinessList = async (data) => {
+  const mutationQuery = gql `
+  mutation createBusinessList {
+    createBusinessList(
+      data: {name: "`+data.name+`", 
+            contactPerson: "`+data.contactPerson+`", 
+            about: "`+data.about+`", 
+            address: "`+data.address+`", 
+            serviceType: "`+data.serviceType+`", 
+            email: "`+data.email+`"
+            category: {create: {name: "`+data.category+`"}}
+      }
+    ) {
+      id
+    }
+    publishManyBookings(to: PUBLISHED) {
+      count
+    }
+  }
+  `
+
+  const result = await request(MASTER_URL, mutationQuery)
+  console.log("global api", mutationQuery)
+  return result
+}
+
 export default {
     getSlider,
     getCategories,
     getBusinessLists,
     getBusinessListByCategory,
     createBooking,
-    getUserBooking
+    getUserBooking,
+    createBusinessList
 }
