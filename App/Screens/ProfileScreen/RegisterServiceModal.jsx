@@ -1,12 +1,15 @@
 import { ScrollView, StyleSheet, ToastAndroid, KeyboardAvoidingView, View, Text, TextInput, TouchableOpacity} from 'react-native'
-import React, {useState} from 'react'
+import React, {useState, useEffect } from 'react'
 import Colors from '../../Utils/Colors';
 import { Ionicons } from '@expo/vector-icons';
 import Heading from '../../Components/Heading';
 import RNPickerSelect from 'react-native-picker-select';
 import { useUser } from '@clerk/clerk-expo';
 import GlobalApi from '../../Utils/GlobalApi';
+import axios from 'axios';
 
+// https://servicodados.ibge.gov.br/api/v1/localidades/estados/{pb}/municipios
+// https://servicodados.ibge.gov.br/api/v1/localidades/estados/
 export default function RegisterServiceModal({hideModal}) {
   const [name, setName] = useState()
   const [contact, setContact] = useState()
@@ -17,7 +20,42 @@ export default function RegisterServiceModal({hideModal}) {
   const [state, setState] = useState("UF");
   const [city, setCity] = useState("Cidade");
 
+  const [selectedState, setSelectedState] = useState(null);
+  const [selectedCity, setSelectedCity] = useState(null);
+
+
   const {user} = useUser()
+
+  useEffect(() => {
+    axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/')
+      .then(response => {
+        const stateAbbreviations = response.data.map(state => ({
+          label: state.sigla,
+          value: state.sigla,
+          key: state.id
+        }));
+        setState(stateAbbreviations);
+      })
+      .catch(error => {
+        console.error('Error fetching states:', error);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (selectedState) {
+      axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedState}/municipios`)
+        .then(response => {
+          const cityNames = response.data.map(city => ({
+            label: city.nome,
+            value: city.nome
+          }));
+          setCity(cityNames);
+        })
+        .catch(error => {
+          console.error('Error fetching cities:', error);
+        });
+    }
+  }, [selectedState]);
 
   const createNewBusiness = () => {
     if (!name || !about) {
@@ -29,7 +67,7 @@ export default function RegisterServiceModal({hideModal}) {
       name: name,
       email: user?.primaryEmailAddress,
       contactPerson: contact,
-      address: state,
+      address: `${selectedCity}, ${selectedState}`,
       about: about,
       serviceType: serviceType,
       about: about,
@@ -39,7 +77,7 @@ export default function RegisterServiceModal({hideModal}) {
 
     GlobalApi.createBusinessList(data).then(resp => {
       console.log("linha 411", resp)
-      ToastAndroid.show("Cadastro realziado com sucesso!", ToastAndroid.LONG)
+      ToastAndroid.show("Cadastro realizado com sucesso!", ToastAndroid.LONG)
       hideModal()
     })
   }
@@ -68,29 +106,22 @@ export default function RegisterServiceModal({hideModal}) {
       <View style={styles.teste}>
       <View style={styles.select}>
         <RNPickerSelect
-          onValueChange={(value) => setState(value)}
+          onValueChange={(value) => setSelectedState(value)}
           items={[
-            { label: 'UF', value: null },
-            { label: 'Java', value: 'java' },
-            { label: 'JavaScript', value: 'js' },
-            { label: 'Python', value: 'python' },
-            { label: 'C#', value: 'csharp' },
+            { label: 'UF', value: 'UF' },
+            ...state // Adicionando as siglas dos estados como opções
           ]}
-          value={state}
+          value={selectedState}
         />
       </View>
       <View style={styles.select}>
         <RNPickerSelect
-        
-          onValueChange={(value) => setCity(value)}
+          onValueChange={(value) => setSelectedCity(value)}
           items={[
-            { label: 'Cidade', value: 'null' },
-            { label: 'Java', value: 'java' },
-            { label: 'JavaScript', value: 'js' },
-            { label: 'Python', value: 'python' },
-            { label: 'C#', value: 'csharp' },
+            { label: 'Cidade', value: 'Cidade' },
+            ...city
           ]}
-          value={city}
+          value={selectedCity}
         />
       </View>
       </View>
@@ -114,6 +145,9 @@ export default function RegisterServiceModal({hideModal}) {
       <View style={{paddingTop: 20}}>
         <Heading text={'Fale sobre seus serviços'} />
         <TextInput onChangeText= {(text) => setAbout(text)} value={about} numberOfLines={4} multiline={true} placeholder={'Descreva quais são as suas habilidades e o que propõe aos seus clientes...'}  style={styles.noteTextArea}/>
+      </View>
+      <View style={{paddingTop: 20}}>
+        <Text>* Iremos avaliar seu cadastro e caso seja aprovado, entraremos em contato via WhatsApp ou Email.</Text>
       </View>
       <View style={{display: 'flex', flexDirection: 'row', margin: 7, top:20, gap: 8}}>
       <TouchableOpacity style={styles.messageBtn} onPress={() => hideModal()}>

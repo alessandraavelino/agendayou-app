@@ -95,7 +95,7 @@ export default function BookingModal({businessId, hideModal}) {
 
       <View style={{paddingTop: 20}}>
         <Heading text={'Observação'} />
-        <TextInput numberOfLines={4} multiline={true} placeholder={'Envie alguma sugestão ou requisito para o seu agendamento'} onChange = {(text) => setNote(text)} style={styles.noteTextArea}/>
+        <TextInput numberOfLines={4} multiline={true} placeholder={'Informe qual tipo de serviço deseja'} onChange = {(text) => setNote(text)} style={styles.noteTextArea}/>
       </View>
 
       <TouchableOpacity onPress={() => createNewBooking()} style={{marginTop: 15}}>

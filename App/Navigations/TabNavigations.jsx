@@ -2,10 +2,11 @@ import { Text } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ProfileScreen from '../Screens/ProfileScreen/ProfileScreen';
-import { FontAwesome5, Feather} from '@expo/vector-icons';
+import { FontAwesome5, Feather, FontAwesome } from '@expo/vector-icons';
 import Colors from '../Utils/Colors';
 import HomeNavigation from './HomeNavigation';
 import BookingNavigation from './BookingNavigation';
+import PainelScreen from '../Screens/PainelScreen/PainelScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -32,12 +33,12 @@ export default function TabNavigations() {
                 <FontAwesome5 name="calendar-alt" size={24} color={color} />
             )
         }}/>
-        <Tab.Screen name='bookisng' component={BookingNavigation} options={{
+        <Tab.Screen name='painel' component={PainelScreen} options={{
             tabBarLabel:({color}) =>(
             <Text style={{color: color, fontSize: 12, marginTop: -7}}>Painel</Text>
             ),
             tabBarIcon: ({color, size}) =>(
-                <FontAwesome5 name="calendar-alt" size={24} color={color} />
+                <FontAwesome5 name="edit" size={24} color={color} />
             )
         }}/>
         <Tab.Screen name='profile' component={ProfileScreen} options={{
