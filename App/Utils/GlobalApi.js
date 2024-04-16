@@ -159,6 +159,19 @@ const createBusinessList = async (data) => {
   return result
 }
 
+const getOcupationTime = async (businessId) => {
+  const query = gql `
+  query GetUserBookings {
+    bookings(orderBy: updatedAt_DESC, where: {businessList: {id: "`+businessId+`"}}) {
+      time
+    }
+  }
+  
+  `
+  const result = await request(MASTER_URL, query)
+  return result
+}
+
 export default {
     getSlider,
     getCategories,
@@ -166,5 +179,6 @@ export default {
     getBusinessListByCategory,
     createBooking,
     getUserBooking,
-    createBusinessList
+    createBusinessList,
+    getOcupationTime
 }

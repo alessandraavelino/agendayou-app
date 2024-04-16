@@ -15,8 +15,11 @@ export default function BookingModal({businessId, hideModal}) {
   const [selectedDate, setSelectedDate] = useState()
   const [note, setNote] = useState()
   const {user} = useUser()
+  const [ocupiedTimes, setOcupiedTimes] = useState([]);
+
   useEffect(() => {
     getTime()
+    getOcupationTimes()
 
   }, [])
 
@@ -65,6 +68,13 @@ export default function BookingModal({businessId, hideModal}) {
     })
   }
 
+  const getOcupationTimes = () => {
+    GlobalApi.getOcupationTime(businessId).then(resp => {
+      const ocupiedTimes = resp.bookings.map(e => e.time);
+      setOcupiedTimes(ocupiedTimes);
+    });
+  };
+
   return (
     <ScrollView horizontal={false}>
     <KeyboardAvoidingView style={{padding: 20}}>
@@ -79,19 +89,25 @@ export default function BookingModal({businessId, hideModal}) {
       <CalendarPicker onDateChange={setSelectedDate}  width={340} minDate={Date.now()} todayBackgroundColor={Colors.BLACK} todayTextStyle={{color: Colors.WHITE}} selectedDayColor={Colors.PRIMARY} selectedDayTextColor={Colors.WHITE} />
       </View>
 
-      <View style={{marginTop:20}}>
-        <Heading text={'Selecione um horário'} />
-        <FlatList 
-          data={timeList}
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          renderItem={({item, index}) => (
-            <TouchableOpacity onPress={() => setSelectedTime(item.time)} style={{marginRight: 5}}>
-              <Text style={[ selectedTime == item.time ? styles.selectedTime : styles.unselectedTime] }>{item.time}</Text>
+      <View style={{ marginTop: 20 }}>
+      <Heading text={'Selecione um horário'} />
+      <FlatList
+        data={timeList}
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        renderItem={({ item }) => {
+          if (ocupiedTimes.includes(item.time)) {
+            return null; // Não renderiza o item se o horário estiver ocupado
+          }
+          return (
+            <TouchableOpacity onPress={() => setSelectedTime(item.time)} style={{ marginRight: 5 }}>
+              <Text style={[selectedTime === item.time ? styles.selectedTime : styles.unselectedTime]}>{item.time}</Text>
             </TouchableOpacity>
-          )}
-        />
-      </View>
+          );
+        }}
+        keyExtractor={(item) => item.time}
+      />
+    </View>
 
       <View style={{paddingTop: 20}}>
         <Heading text={'Observação'} />
