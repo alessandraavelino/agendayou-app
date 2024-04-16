@@ -11,12 +11,20 @@
     "development": {
       "developmentClient": true,
       "distribution": "internal"
-      
     },
-    
-    "production": {}
+    "production": {
+      "android": {
+        "buildType": "apk"
+        // Adicione outras configurações específicas de produção, se necessário
+      }
+    }
   },
   "submit": {
-    "production": {}
+    "production": {
+      "android": {
+        "buildType": "apk"
+        // Adicione configurações de submissão para produção, como chave de assinatura, etc.
+      }
+    }
   }
 }
