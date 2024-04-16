@@ -20,11 +20,6 @@
     }
   },
   "submit": {
-    "production": {
-      "android": {
-        "buildType": "apk"
-        // Adicione configurações de submissão para produção, como chave de assinatura, etc.
-      }
-    }
+    "production": {}
   }
 }
