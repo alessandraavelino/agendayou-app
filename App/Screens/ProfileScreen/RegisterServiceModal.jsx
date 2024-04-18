@@ -73,10 +73,8 @@ export default function RegisterServiceModal({hideModal}) {
       about: about,
       category: category
     }
-    console.log(data)
 
     GlobalApi.createBusinessList(data).then(resp => {
-      console.log("linha 411", resp)
       ToastAndroid.show("Cadastro realizado com sucesso!", ToastAndroid.LONG)
       hideModal()
     })

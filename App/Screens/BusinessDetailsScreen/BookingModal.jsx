@@ -17,11 +17,13 @@ export default function BookingModal({businessId, hideModal}) {
   const {user} = useUser()
   const [ocupiedTimes, setOcupiedTimes] = useState([]);
 
+
   useEffect(() => {
     getTime()
     getOcupationTimes()
 
   }, [])
+  
 
   const getTime = () => {
     const timeList = [];
@@ -54,7 +56,7 @@ export default function BookingModal({businessId, hideModal}) {
       
     }
     const data = {
-      userName: user?.fullName,
+      name: user?.fullName,
       userEmail: user?.primaryEmailAddress,
       time: selectedTime,
       date: moment(selectedDate).format('DD-MMM-YYYY'),

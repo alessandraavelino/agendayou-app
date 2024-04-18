@@ -42,6 +42,7 @@ const getBusinessLists = async () => {
       name
       email
       contactPerson
+      serviceType
       category {
         name
       }
@@ -65,6 +66,7 @@ const getBusinessListByCategory = async (category) => {
       name
       email
       contactPerson
+      serviceType
       category {
         name
       }
@@ -80,12 +82,12 @@ const getBusinessListByCategory = async (category) => {
   return result
 
 }
-
 const createBooking = async (data) => {
   const mutationQuery = gql `
   mutation createBooking {
     createBooking(
       data: {bookingStatus: Agendado, 
+        userName: "`+data.name+`"
         date: "`+data.date+`", 
         businessList: {
           connect: {id: "`+data.businessId+`"}}, 
@@ -148,14 +150,16 @@ const createBusinessList = async (data) => {
     ) {
       id
     }
-    publishManyBookings(to: PUBLISHED) {
+    publishManyBusinessLists(to: PUBLISHED) {
+      count
+    }
+    publishManyCategories(to: PUBLISHED) {
       count
     }
   }
   `
 
   const result = await request(MASTER_URL, mutationQuery)
-  console.log("global api", mutationQuery)
   return result
 }
 
@@ -172,6 +176,26 @@ const getOcupationTime = async (businessId) => {
   return result
 }
 
+
+const getListBookingsByBusiness = async (email) => {
+  const query = gql `
+  query GetListBookingsBusiness {
+    bookings(where: {businessList: {email: "`+email+`"}}) {
+      date
+      time
+      userName
+      note
+    }
+  }
+  
+  
+  `
+  const result = await request(MASTER_URL, query)
+  return result
+}
+
+
+
 export default {
     getSlider,
     getCategories,
@@ -180,5 +204,6 @@ export default {
     createBooking,
     getUserBooking,
     createBusinessList,
-    getOcupationTime
+    getOcupationTime,
+    getListBookingsByBusiness
 }

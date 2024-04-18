@@ -39,7 +39,7 @@ export default function BusinessDetailsScreen() {
       />
 
       <View style={styles.infoContainer}>
-        <Text style={{fontWeight: 'bold', fontSize: 20}}>{business?.contactPerson}</Text>
+        <Text style={{fontWeight: 'bold', fontSize: 20}}>{business?.serviceType}</Text>
         <View style={styles.subContainer}>
         <Text style={{color: Colors.PRIMARY, backgroundColor: Colors.PRIMARY_LIGHT, padding: 5, borderRadius: 5, fontSize: 14}}> {business?.category && business.category.name}</Text>
         </View>

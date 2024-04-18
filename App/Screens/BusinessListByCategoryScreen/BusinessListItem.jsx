@@ -20,7 +20,7 @@ export default function BusinessListItem({business, booking}) {
 
       <View style={styles.subContainer}>
         <Text style={{fontSize: 15, color: Colors.GRAY}}>{business?.name}</Text>
-        <Text style={{fontSize: 19, fontWeight: 'bold'}}>{business?.contactPerson}</Text>
+        <Text style={{fontSize: 19, fontWeight: 'bold'}}>{business?.serviceType}</Text>
         {!booking?.id ? <Text style={{fontSize: 16, color: Colors.GRAY}}>
             <Ionicons name="location-sharp" size={20} color={Colors.PRIMARY} />
         {business.address}</Text> :
