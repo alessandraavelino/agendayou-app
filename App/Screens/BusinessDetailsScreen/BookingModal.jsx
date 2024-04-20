@@ -57,6 +57,7 @@ export default function BookingModal({businessId, hideModal}) {
     }
     const data = {
       name: user?.fullName,
+      photo: user?.imageUrl,
       userEmail: user?.primaryEmailAddress,
       time: selectedTime,
       date: moment(selectedDate).format('DD-MMM-YYYY'),
@@ -64,10 +65,34 @@ export default function BookingModal({businessId, hideModal}) {
       businessId: businessId
 
     }
-    GlobalApi.createBooking(data).then(resp => {
-      ToastAndroid.show("Agendamento criado com sucesso!", ToastAndroid.LONG)
-      hideModal()
+    console.log("data", data)
+    GlobalApi.createBooking(data)
+    .then(bookingResp => {
+      if (bookingResp) {
+        ToastAndroid.show("Agendamento criado com sucesso!", ToastAndroid.LONG);
+        hideModal();
+
+        // Aguardar 2 segundos (2000 milissegundos) antes de criar o asset
+        setTimeout(() => {
+          GlobalApi.createAsset()
+            .then(assetResp => {
+              console.log("Asset criado com sucesso!", assetResp);
+              // Faça o que for necessário com assetResp aqui
+            })
+            .catch(assetErr => {
+              console.error("Erro ao criar o asset:", assetErr);
+              // Trate o erro ao criar o asset, se necessário
+            });
+        }, 2000);
+
+      } else {
+        throw new Error("Falha ao criar agendamento.");
+      }
     })
+    .catch(error => {
+      console.error("Erro ao criar agendamento:", error);
+      ToastAndroid.show("Erro ao criar agendamento. Por favor, tente novamente.", ToastAndroid.LONG);
+    });
   }
 
   const getOcupationTimes = () => {

@@ -87,15 +87,24 @@ const createBooking = async (data) => {
   mutation createBooking {
     createBooking(
       data: {bookingStatus: Agendado, 
+        
         userName: "`+data.name+`"
         date: "`+data.date+`", 
         businessList: {
           connect: {id: "`+data.businessId+`"}}, 
           time: "`+data.time+`", 
           userEmail: "`+data.userEmail+`", 
-          userName: "`+data.userName+`"}
+          photo: {
+            create: {
+              uploadUrl: "`+data.photo+`",
+            }
+          }
+        }
     ) {
       id
+      photo {
+        id
+      }
     }
     publishManyBookings(to: PUBLISHED) {
       count
@@ -103,8 +112,9 @@ const createBooking = async (data) => {
   }
   
   `
-
   const result = await request(MASTER_URL, mutationQuery)
+
+  console.log("resulttttt", result)
   return result
 }
 
@@ -135,6 +145,8 @@ const getUserBooking = async (userEmail) => {
   return result
 }
 
+
+
 const createBusinessList = async (data) => {
   const mutationQuery = gql `
   mutation createBusinessList {
@@ -153,13 +165,13 @@ const createBusinessList = async (data) => {
     publishManyBusinessLists(to: PUBLISHED) {
       count
     }
-    publishManyCategories(to: PUBLISHED) {
-      count
-    }
+    
   }
   `
 
   const result = await request(MASTER_URL, mutationQuery)
+
+  
   return result
 }
 
@@ -185,14 +197,32 @@ const getListBookingsByBusiness = async (email) => {
       time
       userName
       note
+      photo {
+        url
+      }
     }
   }
   
-  
   `
+  console.log("queryyyyy", query)
   const result = await request(MASTER_URL, query)
   return result
 }
+const createAsset = async () => {
+  const query = gql `
+  mutation createBooking {
+    publishManyAssets(to: PUBLISHED, withDefaultLocale: true, locales: en) {
+      count
+    }
+  }
+  
+  `
+  console.log("queryyyyy", query)
+  const result = await request(MASTER_URL, query)
+  console.log("result asset", result)
+  return result
+}
+
 
 
 
@@ -205,5 +235,6 @@ export default {
     getUserBooking,
     createBusinessList,
     getOcupationTime,
-    getListBookingsByBusiness
+    getListBookingsByBusiness,
+    createAsset
 }

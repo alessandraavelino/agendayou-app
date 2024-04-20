@@ -14,11 +14,19 @@ export default function BookingsBusiness() {
 
   useEffect(() => {
     getBusinessBookings()
+    
+
   }, [])
 
   const getBusinessBookings = () => {
     GlobalApi.getListBookingsByBusiness(email).then(resp => {
+      console.log("bookings: ", resp.bookings)
       setBookingsClient(resp.bookings)
+    })
+  }
+  const createAsset = () => {
+    GlobalApi.createAsset().then(resp => {
+      console.log("aset: ", resp)
     })
   }
 
@@ -29,6 +37,7 @@ export default function BookingsBusiness() {
       data={bookingsClient}
       renderItem={({item, index}) => (
         <View style={styles.container}>
+
           <Text style={{fontSize: 17}}>{item.userName}</Text>
           <Text style={{fontSize: 13}}>{item.note}</Text>
           <Text style={{fontSize: 15, padding: 3, color: Colors.PRIMARY, alignSelf: 'flex-start'}}><AntDesign name="calendar" size={24} color={Colors.PRIMARY} style={{marginRight: 15}}/> {item.date} às {item.time}</Text>
