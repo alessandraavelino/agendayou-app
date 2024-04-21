@@ -17,7 +17,7 @@ export default function BusinessListItemSmall({ business }) {
       
       />
       <View style={styles.infoContainer}>
-        <Text style={{fontSize: 17}}>{business?.userName}</Text>
+        <Text style={{fontSize: 17}}>{business?.name}</Text>
         <Text style={{fontSize: 13}}>{business?.serviceType}</Text>
         
         <Text style={{fontSize: 10, padding: 3, color: Colors.PRIMARY, borderRadius: 3, alignSelf: 'flex-start', backgroundColor: Colors.PRIMARY_LIGHT, paddingHorizontal: 7}}>{business?.category.name}</Text>

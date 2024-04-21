@@ -1,4 +1,4 @@
-import { View, Text, FlatList, StyleSheet } from 'react-native'
+import { View, Text, FlatList, StyleSheet, Image } from 'react-native'
 import React, {useEffect, useState} from 'react'
 import GlobalApi from '../../Utils/GlobalApi'
 import { useUser } from '@clerk/clerk-expo';
@@ -38,10 +38,15 @@ export default function BookingsBusiness() {
       renderItem={({item, index}) => (
         <View style={styles.container}>
 
+          <Image source={{uri:item.photo.url}} style={styles.image}/>
+
+
+          <View style={styles.subContainer}>
           <Text style={{fontSize: 17}}>{item.userName}</Text>
           <Text style={{fontSize: 13}}>{item.note}</Text>
           <Text style={{fontSize: 15, padding: 3, color: Colors.PRIMARY, alignSelf: 'flex-start'}}><AntDesign name="calendar" size={24} color={Colors.PRIMARY} style={{marginRight: 15}}/> {item.date} às {item.time}</Text>
 
+          </View>
         </View>
         
       )}
@@ -56,7 +61,10 @@ const styles = StyleSheet.create({
   container: {
       padding: 10,
       backgroundColor: Colors.WHITE,
-      borderRadius: 10
+      borderRadius: 15,
+      display: 'flex',
+      flexDirection: 'row',
+      gap: 10
       
   },
 
@@ -67,9 +75,13 @@ const styles = StyleSheet.create({
 
   },
   image: {
-      width: 160,
-      height: 100,
-      borderRadius: 10
+      width: 70,
+      height: 70,
+      borderRadius: 9
 
-  }
+  },
+  subContainer: {
+    display: 'flex',
+    gap: 8
+  },
 })
